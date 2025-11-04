@@ -1,123 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GuildWorks</title>
-  <link rel="stylesheet" href="/css/style.css"/>
-</head>
-<body>
-  <!-- HEADER -->
-  <header class="navbar">
-    <div class="nav-left">
-      <span class="logo-text">Guild<span class="accent">Works</span></span>
-    </div>
-    <nav class="nav-center">
-      <a href="#">Home</a>
-      <a href="#">Features</a>
-      <a href="#">Support</a>
-    </nav>
-    <div class="nav-right">
-      <a href="#" class="dashboard-btn">Dashboard</a>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuildWorks — Ticket Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <header class="nav-wrapper">
+      <nav class="navbar">
+        <div class="nav-left">
+          <img src="/images/logo.png" alt="GuildWorks Logo" class="logo" />
+          <span class="brand">Guild<span>Works</span></span>
+        </div>
+        <div class="nav-center">
+          <a href="#">Home</a>
+          <a href="#">Features</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="nav-right">
+          <a href="#" class="dashboard-btn">Dashboard</a>
+        </div>
+      </nav>
+    </header>
 
-  <!-- DOT BACKGROUND -->
-  <canvas id="dots-bg"></canvas>
+    <!-- Hero Section -->
+    <main class="hero">
+      <div class="hero-box">
+        <h1>The <span>PREMIER</span> ticket solution for your community.</h1>
+        <p>
+          We provide expert ticket management built for creators and teams.
+          Simplify your workflow, manage requests efficiently, and empower your
+          support with a system made to feel effortless and professional.
+        </p>
+        <p class="note">
+          Our dashboard is coming soon. Stay tuned for updates.
+        </p>
+      </div>
+    </main>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero">
-      <div class="premier-box">
-        <div class="premier-content">
-          <h1>The <span class="accent">PREMIER</span> ticket solution for your community.</h1>
-          <p>
-            We provide expert ticket management built for creators and teams.
-            Simplify your workflow, manage requests efficiently, and empower your
-            support with a system made to feel effortless and professional.
-          </p>
-          <p>Our dashboard is coming soon. Stay tuned for updates.</p>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-col">
+          <h2 class="footer-logo">GUILD<span>WORKS</span></h2>
+          <p>© 2025 GuildWorks Discord Solutions</p>
+          <p>Powered by <a href="#">xdluxyy</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h3>NAVIGATION</h3>
+          <a href="#">Home</a>
+          <a href="#">Services</a>
+          <a href="#">Support</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>IMPORTANT</h3>
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <a href="#">Ticket System</a>
+          <a href="#">Verification</a>
+          <a href="#">Workflow Tools</a>
         </div>
       </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-section">
-        <h2>GUILD<span class="accent">WORKS</span></h2>
-        <p>© 2025 GuildWorks Discord Solutions</p>
-        <p>Powered by <span class="accent">xdluxyy</span></p>
+      <div class="footer-bottom">
+        <p>
+          © 2025 GuildWorks — Powered by <a href="#">xdluxyy</a> •
+          <a href="#">Privacy Policy</a> •
+          <a href="#">Terms of Service</a>
+        </p>
       </div>
-      <div class="footer-section">
-        <h3>Navigation</h3>
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Support</a>
-      </div>
-      <div class="footer-section">
-        <h3>Important</h3>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- DOTS SCRIPT -->
-  <script>
-    const canvas = document.getElementById('dots-bg');
-    const ctx = canvas.getContext('2d');
-    let dots = [], width, height, mouse = {x: -9999, y: -9999};
-
-    function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      dots = [];
-      for (let i = 0; i < 180; i++) {
-        dots.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.8 + 0.8,
-          dx: (Math.random() - 0.5) * 0.4,
-          dy: (Math.random() - 0.5) * 0.4
-        });
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      for (let d of dots) {
-        d.x += d.dx;
-        d.y += d.dy;
-        if (d.x < 0 || d.x > width) d.dx *= -1;
-        if (d.y < 0 || d.y > height) d.dy *= -1;
-
-        const dist = Math.hypot(d.x - mouse.x, d.y - mouse.y);
-        if (dist < 120) {
-          const angle = Math.atan2(d.y - mouse.y, d.x - mouse.x);
-          d.x += Math.cos(angle);
-          d.y += Math.sin(angle);
-        }
-
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(114,137,218,0.95)';
-        ctx.fill();
-      }
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => (mouse.x = -9999));
-    window.addEventListener('resize', resize);
-    resize();
-    animate();
-  </script>
-</body>
+    <script src="/js/mouse-dots.js"></script>
+  </body>
 </html>
