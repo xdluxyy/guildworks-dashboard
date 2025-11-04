@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GuildWorks</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
   <!-- HEADER -->
@@ -32,10 +32,11 @@
         <div class="premier-content">
           <h1>The <span class="accent">PREMIER</span> ticket solution for your community.</h1>
           <p>
-            We provide expert ticket management designed to simplify your workflow, streamline communication,
-            and ensure every request receives the care and efficiency it deserves.
+            We provide expert ticket management built for creators and teams.
+            Simplify your workflow, manage requests efficiently, and empower your
+            support with a system made to feel effortless and professional.
           </p>
-          <p>Our dashboard is coming soon. Check back here later…</p>
+          <p>Our dashboard is coming soon. Stay tuned for updates.</p>
         </div>
       </div>
     </section>
@@ -50,21 +51,21 @@
         <p>Powered by <span class="accent">xdluxyy</span></p>
       </div>
       <div class="footer-section">
-        <h3>NAVIGATION</h3>
+        <h3>Navigation</h3>
         <a href="#">Home</a>
         <a href="#">Services</a>
         <a href="#">Support</a>
       </div>
       <div class="footer-section">
-        <h3>IMPORTANT</h3>
+        <h3>Important</h3>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
       </div>
     </div>
   </footer>
 
+  <!-- DOTS SCRIPT -->
   <script>
-    // Dots animation
     const canvas = document.getElementById('dots-bg');
     const ctx = canvas.getContext('2d');
     let dots = [], width, height, mouse = {x: -9999, y: -9999};
@@ -79,9 +80,9 @@
         dots.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          r: Math.random() * 1.6 + 0.6,
-          dx: (Math.random() - 0.5) * 0.3,
-          dy: (Math.random() - 0.5) * 0.3
+          r: Math.random() * 1.8 + 0.8,
+          dx: (Math.random() - 0.5) * 0.4,
+          dy: (Math.random() - 0.5) * 0.4
         });
       }
     }
@@ -93,15 +94,17 @@
         d.y += d.dy;
         if (d.x < 0 || d.x > width) d.dx *= -1;
         if (d.y < 0 || d.y > height) d.dy *= -1;
+
         const dist = Math.hypot(d.x - mouse.x, d.y - mouse.y);
         if (dist < 120) {
           const angle = Math.atan2(d.y - mouse.y, d.x - mouse.x);
           d.x += Math.cos(angle);
           d.y += Math.sin(angle);
         }
+
         ctx.beginPath();
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(114,137,218,0.9)';
+        ctx.fillStyle = 'rgba(114,137,218,0.95)';
         ctx.fill();
       }
       requestAnimationFrame(animate);
