@@ -5,35 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GuildWorks Dashboard</title>
   <style>
+    /* === Reset and Base === */
     body {
       margin: 0;
-      background-color: #090a11;
-      overflow-x: hidden;
-      font-family: 'Poppins', sans-serif;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #0b0c10;
       color: white;
+      overflow-x: hidden;
     }
 
-    /* Header */
+    /* === Background Dots === */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: 0;
+    }
+
+    /* === Header === */
     header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
+      padding: 18px 60px;
       position: fixed;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(10, 10, 15, 0.65);
       backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       z-index: 10;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
       font-weight: 600;
-      font-size: 1.4rem;
-      letter-spacing: 0.5px;
+      font-size: 1.3rem;
+      color: #fff;
     }
 
     .logo span {
@@ -45,119 +59,106 @@
       margin: 0 18px;
       text-decoration: none;
       color: #bdbdbd;
-      transition: color 0.2s ease;
       font-weight: 500;
+      transition: color 0.2s ease;
     }
 
     nav a:hover {
-      color: white;
+      color: #ffffff;
     }
 
     .dash-btn {
       padding: 10px 20px;
-      background: #5865F2;
+      background: linear-gradient(120deg, #5865f2, #7289da);
       border-radius: 10px;
       color: white;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .dash-btn:hover {
-      background: #4752c4;
-      box-shadow: 0 0 15px rgba(88, 101, 242, 0.8);
+      background: linear-gradient(120deg, #4752c4, #5865f2);
+      box-shadow: 0 0 15px rgba(88, 101, 242, 0.7);
     }
 
-    /* Dots Canvas */
-    #dotCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      z-index: 0;
-    }
-
-    /* Main Box */
-    .content-box {
+    /* === Center Content === */
+    .content {
       position: relative;
       z-index: 2;
-      background: rgba(0, 0, 0, 0.75);
-      border-radius: 20px;
-      padding: 60px;
-      margin: 200px auto;
-      max-width: 900px;
       text-align: center;
-      box-shadow: 0 0 60px rgba(88, 101, 242, 0.25);
-      overflow: hidden;
-      transition: all 0.4s ease;
+      margin-top: 180px;
+      padding: 60px 30px 180px;
     }
 
-    .content-box:hover {
-      background: linear-gradient(120deg, rgba(88,101,242,0.25), rgba(141,160,255,0.25), rgba(88,101,242,0.25));
-      box-shadow: 0 0 100px rgba(88,101,242,0.8);
-    }
-
-    .content-box::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -150%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(88,101,242,0.9), transparent);
-      transform: skewX(-15deg);
-      opacity: 0;
-      transition: all 0.8s ease;
-    }
-
-    .content-box:hover::before {
-      left: 150%;
-      opacity: 1;
-    }
-
-    h1 {
-      font-size: 2.5rem;
+    .content h1 {
+      font-size: 2.4rem;
       font-weight: 700;
       color: white;
     }
 
-    h1 span {
-      color: #5865F2;
+    .content h1 span {
+      color: #5865f2;
     }
 
-    p {
+    .content p {
       color: #bdbdbd;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+      margin-top: 15px;
+      line-height: 1.6;
     }
 
-    /* Footer */
+    /* === Footer === */
     footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
       width: 100%;
       text-align: center;
       padding: 15px 0;
       font-size: 0.9rem;
-      color: #8b8b8b;
-      background: rgba(0, 0, 0, 0.35);
+      color: #bdbdbd;
+      background: rgba(10, 10, 15, 0.65);
       backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      position: fixed;
+      bottom: 0;
+      left: 0;
       z-index: 10;
     }
 
     footer a {
-      color: #5865F2;
+      color: #5865f2;
       text-decoration: none;
-      margin-left: 4px;
+      margin: 0 8px;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* === Responsiveness === */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 0 10px;
+      }
+
+      .content {
+        margin-top: 220px;
+        padding: 50px 20px 180px;
+      }
+
+      .content h1 {
+        font-size: 1.8rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
     <div class="logo">Guild<span>Works</span></div>
     <nav>
@@ -168,92 +169,18 @@
     </nav>
   </header>
 
-  <canvas id="dotCanvas"></canvas>
-
-  <div class="content-box">
+  <!-- MAIN CONTENT -->
+  <div class="content">
     <h1>The <span>PREMIER</span> ticket solution for your community.</h1>
     <p>We provide expert ticket management designed to simplify your workflow, streamline communication, and ensure every request receives the care and efficiency it deserves.</p>
     <p>Our dashboard is coming soon. Check back here later...</p>
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    © 2025 GuildWorks — Powered by xdluxyy | 
-    <a href="#">Privacy Policy</a>
+    © 2025 GuildWorks Discord Solutions — Powered by xdluxyy • 
+    <a href="#">Privacy Policy</a> • 
+    <a href="#">Terms of Service</a>
   </footer>
-
-  <script>
-    const canvas = document.getElementById("dotCanvas");
-    const ctx = canvas.getContext("2d");
-    let dots = [];
-    const numDots = 160;
-    let mouse = { x: null, y: null, radius: 120 };
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight / 2;
-
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight / 2;
-      createDots();
-    });
-
-    window.addEventListener("mousemove", (e) => {
-      mouse.x = e.x;
-      mouse.y = e.y;
-    });
-
-    class Dot {
-      constructor(x, y, dx, dy, size) {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
-        this.size = size;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(88,101,242,0.85)";
-        ctx.fill();
-      }
-      update() {
-        if (this.x + this.size > canvas.width || this.x - this.size < 0) this.dx = -this.dx;
-        if (this.y + this.size > canvas.height || this.y - this.size < 0) this.dy = -this.dy;
-        this.x += this.dx;
-        this.y += this.dy;
-
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < mouse.radius) {
-          this.x -= dx / 10;
-          this.y -= dy / 10;
-        }
-
-        this.draw();
-      }
-    }
-
-    function createDots() {
-      dots = [];
-      for (let i = 0; i < numDots; i++) {
-        let size = Math.random() * 1.8 + 0.5;
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
-        let dx = (Math.random() - 0.5) * 0.5;
-        let dy = (Math.random() - 0.5) * 0.5;
-        dots.push(new Dot(x, y, dx, dy, size));
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      dots.forEach(dot => dot.update());
-      requestAnimationFrame(animate);
-    }
-
-    createDots();
-    animate();
-  </script>
 </body>
 </html>
