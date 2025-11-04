@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0d0f14;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  background: rgba(13, 15, 20, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.6em;
+  font-weight: 800;
+  color: #5865f2;
+}
+
+.navbar nav a {
+  margin: 0 15px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar nav a:hover::after {
+  content: " :> Take me there!";
+  position: absolute;
+  right: -130px;
+  color: #7289da;
+  font-weight: 600;
+}
+
+.navbar nav a:hover {
+  color: #7289da;
+}
+
+.dashboard-btn {
+  background: linear-gradient(90deg, #5865f2, #7289da);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
+}
+
+/* Background dots */
+.bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#8c9bff 1.5px, transparent 1.5px);
+  background-size: 45px 45px;
+  opacity: 0.25;
+  z-index: 1;
+  animation: moveDots 8s linear infinite;
+}
+
+@keyframes moveDots {
+  0% { background-position: 0 0; }
+  50% { background-position: 50px 50px; }
+  100% { background-position: 0 0; }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  padding: 0 20px;
+}
+
+/* Black Container */
+.hero-box {
+  background: #0b0c10;
+  border-radius: 20px;
+  padding: 50px 60px;
+  max-width: 900px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s ease;
+}
+
+/* Soft holographic background */
+.hero-box::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    120deg,
+    #5865f2,
+    #00b0f4,
+    #ff73fa,
+    #7289da,
+    #5865f2
+  );
+  background-size: 400% 400%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.hero-box:hover::before {
+  opacity: 0.5; /* dimmer so text stays readable */
+  animation: hologlow 6s linear infinite;
+}
+/* Canvas inside hero box */
+#dotCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+
+@keyframes hologlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Line effect */
+.hover-line {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #5865f2, #00b0f4, #ff73fa);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.hero-box:hover .hover-line {
+  animation: sweep 2s ease forwards;
+  opacity: 1;
+}
+
+@keyframes sweep {
+  0% { left: -100%; }
+  50% { left: 0%; }
+  100% { left: 100%; }
+}
+
+/* Text */
+.hero-box * {
+  position: relative;
+  z-index: 3;
+}
+
+.hero h1 {
+  font-size: 2.8em;
+  line-height: 1.3em;
+  color: #ffffff;
+}
+
+.hero h1 span {
+  color: #a3b3ff;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 20px auto;
+  color: #d1d4e1;
+  font-size: 1.15em;
+  line-height: 1.6em;
+}
+
+.coming-soon {
+  margin-top: 30px;
+  color: #9ea3bc;
+  font-weight: 500;
+}
+
+/* Footer */
+footer {
+  background: #0b0c10;
+  color: #ccc;
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid #1a1c23;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-left h3 {
+  color: #5865f2;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  margin-top: 20px;
+}
+
+.footer-links h4 {
+  color: #7289da;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  display: inline-block;
+  margin: 5px 10px;
+  text-decoration: none;
+  color: #b0b3c3;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #7289da;
+  font-weight: 600;
+}
