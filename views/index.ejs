@@ -1,60 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="title" content="GuildWorks Dashboard">
-<meta name="description" content="Manage your Discord service tickets with GuildWorks — the premier ticket solution for your community.">
-<meta property="og:title" content="GuildWorks Dashboard" />
-<meta property="og:description" content="Simplify ticket management, communication, and workflow." />
-<meta property="og:image" content="https://guildworks-dashboard.onrender.com/public/logo.png" />
-<meta name="theme-color" content="#5865F2">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuildWorks Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 50% 50%, #0b0b11 0%, #09090f 100%);
+      overflow: hidden;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
 
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css" />
+    canvas#dotCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .content-box {
+      position: relative;
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 20px;
+      padding: 60px;
+      margin: 150px auto;
+      max-width: 900px;
+      text-align: center;
+      z-index: 1;
+      transition: all 0.5s ease;
+      box-shadow: 0 0 50px rgba(88, 101, 242, 0.1);
+    }
+
+    .content-box:hover {
+      background: linear-gradient(120deg, rgba(88,101,242,0.2), rgba(141,160,255,0.25), rgba(88,101,242,0.2));
+      box-shadow: 0 0 80px rgba(88,101,242,0.6);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    h1 span {
+      color: #5865F2;
+    }
+
+    p {
+      color: #bdbdbd;
+      font-size: 1.1rem;
+    }
+
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">GuildWorks</div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Features</a>
-      <a href="#">Support</a>
-    </nav>
-    <a href="#" class="dashboard-btn">Dashboard</a>
-  </header>
+  <canvas id="dotCanvas"></canvas>
 
-  <!-- HERO SECTION -->
-  <section class="hero-section">
-    <div class="bg-grid"></div>
+  <div class="content-box">
+    <h1>The <span>PREMIER</span> ticket solution for your community.</h1>
+    <p>We provide expert ticket management designed to simplify your workflow, streamline communication, and ensure every request receives the care and efficiency it deserves.</p>
+    <p>Our dashboard is coming soon. Check back here later...</p>
+  </div>
 
-    <div class="hero">
-      <div class="hero-box">
-        <span class="hover-line"></span>
-        <h1>The <span>PREMIER</span> ticket solution for your community.</h1>
-        <p>We provide expert ticket management designed to simplify your workflow, streamline communication, and ensure every request receives the care and efficiency it deserves.</p>
-        <p class="coming-soon">Our dashboard is coming soon. Check back here later...</p>
-      </div>
-    </div>
-  </section>
+  <script>
+    const canvas = document.getElementById('dotCanvas');
+    const ctx = canvas.getContext('2d');
+    let dots = [];
+    const numDots = 150;
+    let mouse = { x: null, y: null, radius: 120 };
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-left">
-        <h3>GUILDWORKS</h3>
-        <p>© 2025 GuildWorks Discord Solutions</p>
-        <p>Founded by xdluxyy</p>
-      </div>
-      <div class="footer-links">
-        <h4>Navigation</h4>
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-        <h4>Legal</h4>
-        <a href="#">Terms of Service</a>
-        <a href="#">Privacy Policy</a>
-      </div>
-    </div>
-  </footer>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      createDots();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    class Dot {
+      constructor(x, y, dx, dy, size) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.size = size;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(88,101,242,0.7)';
+        ctx.fill();
+      }
+      update() {
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) this.dx = -this.dx;
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) this.dy = -this.dy;
+
+        this.x += this.dx;
+        this.y += this.dy;
+
+        // Cursor interaction
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius) {
+          this.x -= dx / 8;
+          this.y -= dy / 8;
+        }
+        this.draw();
+      }
+    }
+
+    function createDots() {
+      dots = [];
+      for (let i = 0; i < numDots; i++) {
+        let size = Math.random() * 1.8 + 0.5;
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height * 0.6; // stay in top section
+        let dx = (Math.random() - 0.5) * 0.6;
+        let dy = (Math.random() - 0.5) * 0.6;
+        dots.push(new Dot(x, y, dx, dy, size));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      dots.forEach(dot => dot.update());
+      requestAnimationFrame(animate);
+    }
+
+    createDots();
+    animate();
+  </script>
 </body>
 </html>
