@@ -17,49 +17,38 @@ body {
 
 .navbar {
   background: rgba(0, 0, 0, 0.7);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 0 0 30px rgba(88, 101, 242, 0.35);
-  padding: 18px 40px; /* thicker and wider */
+  padding: 18px 40px;
   display: flex;
   align-items: center;
-  gap: 60px; /* slightly more spacing between logo + links */
-  min-width: 900px; /* keeps it wide and balanced */
+  justify-content: space-between;
+  width: 80%;
+  max-width: 1200px;
 }
 
-
-.nav-left {
+.nav-wrapper {
   display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo {
-  height: 24px;
-  width: 24px;
-}
-
-.brand {
-  font-weight: 700;
-  font-size: 16px;
-}
-.brand span {
-  color: #5865f2;
+  justify-content: center;
+  margin-top: 25px;
 }
 
 .nav-center {
   display: flex;
-  gap: 20px;
+  gap: 40px;
+  margin: 0 auto;
 }
 
 .nav-center a {
   color: #ccc;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   transition: 0.2s;
 }
 .nav-center a:hover {
   color: #fff;
 }
+
 
 .dashboard-btn {
   position: relative;
