@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GuildWorks</title>
-  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <!-- Header (unchanged) -->
+  <!-- HEADER -->
   <header class="navbar">
-    <div class="logo">
-      <img src="/img/gw-logo.png" alt="GuildWorks Logo" class="logo-img"/>
+    <div class="nav-left">
       <span class="logo-text">Guild<span class="accent">Works</span></span>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Support</a></li>
-      </ul>
+    <nav class="nav-center">
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Support</a>
     </nav>
-    <a href="#" class="dashboard-btn">Dashboard</a>
+    <div class="nav-right">
+      <a href="#" class="dashboard-btn">Dashboard</a>
+    </div>
   </header>
 
-  <!-- Background dots canvas -->
+  <!-- DOT BACKGROUND -->
   <canvas id="dots-bg"></canvas>
 
-  <!-- Main content -->
+  <!-- HERO -->
   <main>
     <section class="hero">
       <div class="premier-box">
-        <div class="holo-border"></div>
         <div class="premier-content">
           <h1>The <span class="accent">PREMIER</span> ticket solution for your community.</h1>
           <p>
@@ -43,24 +41,33 @@
     </section>
   </main>
 
-  <!-- Footer centered -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-centered">
-      <h2>GUILD<span class="accent">WORKS</span></h2>
-      <p>© 2025 GuildWorks Discord Solutions — Powered by <span class="accent">xdluxyy</span></p>
-      <div class="footer-links-center">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2>GUILD<span class="accent">WORKS</span></h2>
+        <p>© 2025 GuildWorks Discord Solutions</p>
+        <p>Powered by <span class="accent">xdluxyy</span></p>
+      </div>
+      <div class="footer-section">
+        <h3>NAVIGATION</h3>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Support</a>
+      </div>
+      <div class="footer-section">
+        <h3>IMPORTANT</h3>
         <a href="#">Privacy Policy</a>
-        <span>•</span>
         <a href="#">Terms of Service</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // --- background dots ---
+    // Dots animation
     const canvas = document.getElementById('dots-bg');
     const ctx = canvas.getContext('2d');
-    let dots = [], mouse = {x:-999,y:-999}, width, height;
+    let dots = [], width, height, mouse = {x: -9999, y: -9999};
 
     function resize() {
       width = window.innerWidth;
@@ -72,7 +79,7 @@
         dots.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          r: Math.random() * 1.5 + 0.3,
+          r: Math.random() * 1.6 + 0.6,
           dx: (Math.random() - 0.5) * 0.3,
           dy: (Math.random() - 0.5) * 0.3
         });
@@ -80,7 +87,7 @@
     }
 
     function animate() {
-      ctx.clearRect(0,0,width,height);
+      ctx.clearRect(0, 0, width, height);
       for (let d of dots) {
         d.x += d.dx;
         d.y += d.dy;
@@ -94,7 +101,7 @@
         }
         ctx.beginPath();
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(114,137,218,0.7)';
+        ctx.fillStyle = 'rgba(114,137,218,0.9)';
         ctx.fill();
       }
       requestAnimationFrame(animate);
@@ -104,7 +111,7 @@
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     });
-    window.addEventListener('mouseleave', () => mouse.x = -9999);
+    window.addEventListener('mouseleave', () => (mouse.x = -9999));
     window.addEventListener('resize', resize);
     resize();
     animate();

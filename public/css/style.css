@@ -1,94 +1,83 @@
 :root {
-  --bg: #0f1116;
-  --text: #ffffff;
+  --bg: #0e0f12;
   --blurple: #5865f2;
   --blurple2: #7289da;
+  --text: #fff;
 }
 
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
 }
 
-/* header */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background: rgba(15,17,22,0.85);
+  padding: 10px 60px;
+  background: rgba(0,0,0,0.65);
+  border-radius: 15px;
+  margin: 10px auto;
+  width: 90%;
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 0 10px rgba(88,101,242,0.05);
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.logo-img { width: 28px; height: 28px; }
-.logo-text { font-weight: 700; font-size: 18px; }
-.accent { color: var(--blurple); }
 
-nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
-nav a { color: var(--text); text-decoration: none; opacity: 0.9; }
-nav a:hover { color: var(--blurple); }
+.nav-center a {
+  margin: 0 18px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.nav-center a:hover { color: var(--blurple); opacity: 1; }
 
 .dashboard-btn {
   background: var(--blurple);
-  color: #fff;
-  padding: 9px 18px;
-  border-radius: 12px;
-  text-decoration: none;
+  padding: 7px 18px;
+  border-radius: 10px;
   font-weight: 600;
-  box-shadow: 0 0 25px rgba(88,101,242,0.5);
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 0 20px rgba(88,101,242,0.5);
 }
 
-/* hero + box */
+/* Hero */
 .hero {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
-  position: relative;
-  z-index: 2;
 }
 
 .premier-box {
-  position: relative;
   background: #0b0d12;
-  padding: 50px 40px;
   border-radius: 20px;
+  padding: 60px 45px;
   text-align: center;
   max-width: 900px;
-  width: 90%;
+  transition: all 0.6s ease;
   box-shadow: 0 0 50px rgba(88,101,242,0.15);
-  overflow: hidden;
+  position: relative;
 }
 
-.holo-border {
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  padding: 2px;
-  background: linear-gradient(120deg, #5865f2, #99aaff, #5865f2, #7289da, #5865f2);
-  background-size: 300% 300%;
-  animation: holo 10s ease infinite;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  pointer-events: none;
+.premier-box:hover {
+  background: linear-gradient(120deg, rgba(88,101,242,0.3), rgba(114,137,218,0.3), rgba(88,101,242,0.3));
+  background-size: 400% 400%;
+  animation: moveGradient 6s infinite ease;
 }
 
-@keyframes holo {
+@keyframes moveGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* text inside */
 .premier-content h1 {
   font-size: 2rem;
   font-weight: 800;
@@ -97,42 +86,50 @@ nav a:hover { color: var(--blurple); }
   color: rgba(255,255,255,0.7);
   max-width: 700px;
   margin: 10px auto;
-  line-height: 1.6;
 }
 
-/* background dots */
+/* Dots background */
 #dots-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.55;
 }
 
-/* footer */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 60px 20px 30px;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 50px 80px;
+  background: #0b0c10;
 }
-.footer-centered h2 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 800;
-}
-.footer-centered p {
-  margin: 6px 0 14px;
-  opacity: 0.85;
-}
-.footer-links-center {
+
+.footer-container {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: auto;
+  text-align: left;
+  gap: 40px;
 }
-.footer-links-center a {
+
+.footer-section h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.footer-section h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #b8b8b8;
+  letter-spacing: 1px;
+}
+.footer-section a {
+  display: block;
   color: var(--blurple);
   text-decoration: none;
+  margin: 5px 0;
 }
-.footer-links-center a:hover {
-  text-decoration: underline;
-}
+.footer-section a:hover { text-decoration: underline; }
+.footer-section p { opacity: 0.8; font-size: 14px; }
