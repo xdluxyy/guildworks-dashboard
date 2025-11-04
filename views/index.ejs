@@ -1,216 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuildWorks — Dashboard</title>
-
-  <style>
-    /* ===== Base & dotted background (unchanged) ===== */
-    :root{
-      --bg:#0b0c10;
-      --text:#ffffff;
-      --muted:#b9c0cc;
-      --blurple:#5865f2;
-      --blurple-2:#7b86ff;
-      --card:#0f1117;
-      --border:rgba(255,255,255,.06);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-    }
-    /* subtle dotted field across page */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:radial-gradient(rgba(120,130,255,.18) 1px, transparent 1px);
-      background-size:28px 28px;
-      pointer-events:none; z-index:0;
-    }
-
-    /* ===== Top nav: rounded, pill container, center links ===== */
-    .nav-wrap{
-      position:fixed; top:16px; left:0; right:0;
-      display:flex; justify-content:center; z-index:20;
-      padding:0 16px;
-    }
-    .nav{
-      width:min(1180px,100%);
-      display:flex; align-items:center; justify-content:space-between;
-      background:rgba(10,10,14,.86);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px 18px;
-      box-shadow:0 10px 30px rgba(88,101,242,.18);
-      backdrop-filter:blur(8px);
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px;
-    }
-    .brand .mark{
-      width:36px; height:36px; border-radius:10px;
-      display:grid; place-items:center;
-      background:linear-gradient(135deg,var(--blurple),var(--blurple-2));
-      color:#fff; font-weight:800;
-      box-shadow:0 6px 20px rgba(88,101,242,.35);
-    }
-    .brand span{color:#fff; font-weight:700}
-    .brand span em{color:var(--blurple); font-style:normal}
-
-    .nav-links{
-      display:flex; align-items:center; gap:26px;
-      margin:0 auto; /* centers links row like the inspo */
-    }
-    .nav-links a{
-      color:#d9deea; text-decoration:none; font-weight:600; font-size:.95rem;
-      padding:6px 2px; border-radius:8px; transition:.2s;
-    }
-    .nav-links a:hover{color:#fff}
-
-    .nav-cta{
-      display:flex; gap:10px; align-items:center;
-    }
-    .btn{
-      text-decoration:none; font-weight:700; border-radius:12px; padding:10px 18px;
-      transition:transform .06s ease, box-shadow .25s ease, background .25s ease;
-      border:1px solid var(--border);
-    }
-    .btn-dash{
-      background:linear-gradient(135deg,var(--blurple),var(--blurple-2));
-      color:#fff;
-      box-shadow:0 10px 28px rgba(88,101,242,.45);
-    }
-    .btn-dash:hover{transform:translateY(-1px); box-shadow:0 14px 34px rgba(88,101,242,.55)}
-
-    /* ===== Hero content (kept like your current layout) ===== */
-    .container{position:relative; z-index:1; width:min(980px,90%); margin:0 auto;}
-    .hero{
-      text-align:center; padding-top:140px; /* room under nav */
-    }
-    .hero h1{
-      margin:0 0 10px; font-size:clamp(22px,2.6vw,34px); line-height:1.25; font-weight:800;
-      letter-spacing:.2px;
-    }
-    .hero h1 .accent{color:var(--blurple)}
-    .hero p{margin:8px auto; color:#c6cbda; max-width:760px; font-size:.96rem}
-
-    /* ===== Footer (BloxCord-style sections) ===== */
-    footer{
-      margin-top:110px; padding:48px 18px 56px;
-      background:rgba(8,9,13,.9); border-top:1px solid var(--border);
-    }
-    .foot-wrap{width:min(1180px,92%); margin:0 auto; color:#cfd3e3}
-    .foot-grid{
-      display:grid; gap:26px; grid-template-columns: 1.2fr repeat(3, 1fr);
-    }
-    .foot-brand h3{margin:0 0 10px; font-size:1.6rem; font-weight:800; letter-spacing:.3px}
-    .foot-brand h3 .thin{font-weight:800; color:#fff}
-    .foot-brand h3 .accent{color:var(--blurple)}
-    .foot-brand p{margin:10px 0 0; color:#9aa3ba; font-size:.95rem}
-
-    .foot-col h4{
-      margin:0 0 10px; color:#aab3cc; letter-spacing:.5px; font-weight:800; font-size:.9rem;
-    }
-    .foot-col a{
-      display:block; color:#e3e7f7; text-decoration:none; padding:6px 0; font-weight:600;
-    }
-    .foot-col a:hover{color:#fff}
-
-    .foot-bottom{
-      margin-top:24px; padding-top:16px; border-top:1px solid var(--border);
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
-      color:#99a2bf; font-size:.9rem;
-    }
-    .foot-bottom a{color:var(--blurple); text-decoration:none; font-weight:700}
-    .dot{opacity:.5; padding:0 8px}
-
-    /* ===== Responsive ===== */
-    @media (max-width:900px){
-      .nav{gap:10px}
-      .nav-links{display:none} /* keeps pill compact on mobile like the inspo */
-      .foot-grid{grid-template-columns:1fr 1fr}
-    }
-    @media (max-width:560px){
-      .foot-grid{grid-template-columns:1fr}
-      .hero{padding-top:120px}
-    }
-  </style>
-</head>
-<body>
-  <!-- Rounded top nav -->
-  <div class="nav-wrap">
-    <div class="nav">
-      <div class="brand">
-        <div class="mark">GW</div>
-        <span>Guild<em>Works</em></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuildWorks</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="navbar">
+      <div class="logo">
+        <img src="/img/gw-logo.png" alt="GuildWorks Logo" class="logo-img" />
+        <span class="logo-text">Guild<span class="accent">Works</span></span>
       </div>
-
-      <nav class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#">Support</a>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
       </nav>
+      <a href="#" class="dashboard-btn">Dashboard</a>
+    </header>
 
-      <div class="nav-cta">
-        <a class="btn btn-dash" href="#">Dashboard</a>
-      </div>
-    </div>
-  </div>
+    <!-- Hero / Premier Section -->
+    <main>
+      <section class="hero">
+        <div class="dot-field"></div>
+        <div class="holo-box">
+          <h1>
+            The <span class="accent">PREMIER</span> ticket solution for your community.
+          </h1>
+          <p>
+            We provide expert ticket management designed to simplify your workflow, streamline communication,
+            and ensure every request receives the care and efficiency it deserves.
+          </p>
+          <p>Our dashboard is coming soon. Check back here later…</p>
+        </div>
+      </section>
+    </main>
 
-  <!-- Your existing hero (unchanged copy) -->
-  <main class="container hero">
-    <h1>The <span class="accent">PREMIER</span> ticket solution for your community.</h1>
-    <p>We provide expert ticket management designed to simplify your workflow, streamline communication, and ensure every request receives the care and efficiency it deserves.</p>
-    <p>Our dashboard is coming soon. Check back here later...</p>
-  </main>
-
-  <!-- Footer with columns like the screenshot -->
-  <footer>
-    <div class="foot-wrap">
-      <div class="foot-grid">
-        <div class="foot-brand">
-          <h3><span class="thin">GUILD</span><span class="accent">WORKS</span></h3>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h2>GUILD<span class="accent">WORKS</span></h2>
           <p>© 2025 GuildWorks Discord Solutions</p>
-          <p style="margin-top:6px">Powered by xdluxyy</p>
+          <p>Powered by xdluxyy</p>
         </div>
 
-        <div class="foot-col">
-          <h4>NAVIGATION</h4>
-          <a href="#">Home</a>
-          <a href="#">Services</a>
-          <a href="#">Support</a>
+        <div class="footer-links">
+          <div>
+            <h3>NAVIGATION</h3>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Support</a>
+          </div>
+          <div>
+            <h3>IMPORTANT</h3>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+          <div>
+            <h3>PRODUCTS</h3>
+            <a href="#">Ticket System</a>
+            <a href="#">Verification</a>
+            <a href="#">Workflow Tools</a>
+          </div>
         </div>
+      </div>
 
-        <div class="foot-col">
-          <h4>IMPORTANT</h4>
+      <div class="footer-bottom">
+        <p>
+          © 2025 GuildWorks — Powered by xdluxyy •
+          <a href="#">Privacy Policy</a> •
           <a href="#">Terms of Service</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-
-        <div class="foot-col">
-          <h4>PRODUCTS</h4>
-          <a href="#">Ticket System</a>
-          <a href="#">Verification</a>
-          <a href="#">Workflow Tools</a>
-        </div>
+        </p>
       </div>
+    </footer>
 
-      <div class="foot-bottom">
-        <span>© 2025 GuildWorks</span>
-        <span class="dot">•</span>
-        <span>Powered by <a href="#">xdluxyy</a></span>
-        <span class="dot">•</span>
-        <a href="#">Privacy Policy</a>
-        <span class="dot">•</span>
-        <a href="#">Terms of Service</a>
-      </div>
-    </div>
-  </footer>
-</body>
+    <script>
+      const dotField = document.querySelector(".dot-field");
+      const ctx = document.createElement("canvas");
+      const c = ctx.getContext("2d");
+      dotField.appendChild(ctx);
+
+      function resize() {
+        ctx.width = window.innerWidth;
+        ctx.height = 400;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      const dots = Array(180)
+        .fill()
+        .map(() => ({
+          x: Math.random() * ctx.width,
+          y: Math.random() * ctx.height,
+          size: 1,
+          baseY: 0,
+        }));
+
+      window.addEventListener("mousemove", (e) => {
+        const rect = ctx.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        dots.forEach((d) => {
+          const dx = mx - d.x;
+          const dy = my - d.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            d.y -= (100 - dist) * 0.02;
+          } else {
+            d.y += (Math.random() - 0.5) * 0.1;
+          }
+        });
+      });
+
+      function animate() {
+        c.fillStyle = "rgba(0, 0, 0, 0)";
+        c.clearRect(0, 0, ctx.width, ctx.height);
+        dots.forEach((d) => {
+          c.fillStyle = "#5865f2";
+          c.beginPath();
+          c.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+          c.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
 </html>
