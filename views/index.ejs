@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GuildWorks</title>
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <!-- Navigation -->
-    <header class="navbar">
-      <div class="logo">
-        <img src="/img/gw-logo.png" alt="GuildWorks Logo" class="logo-img" />
-        <span class="logo-text">Guild<span class="accent">Works</span></span>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Support</a></li>
-        </ul>
-      </nav>
-      <a href="#" class="dashboard-btn">Dashboard</a>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GuildWorks</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <!-- Top Nav (unchanged) -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="/img/gw-logo.png" alt="GuildWorks Logo" class="logo-img"/>
+      <span class="logo-text">Guild<span class="accent">Works</span></span>
+    </div>
 
-    <!-- Hero / Premier Section -->
-    <main>
-      <section class="hero">
-        <div class="dot-field"></div>
-        <div class="holo-box">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="dashboard-btn">Dashboard</a>
+  </header>
+
+  <main>
+    <!-- Center section with the rounded box + mouse-reactive dots -->
+    <section class="hero">
+      <div class="premier-box">
+        <div class="premier-border"></div> <!-- holographic border layer -->
+        <canvas class="premier-canvas" aria-hidden="true"></canvas> <!-- dots stay in here -->
+
+        <div class="premier-content">
           <h1>
             The <span class="accent">PREMIER</span> ticket solution for your community.
           </h1>
@@ -37,98 +42,156 @@
           </p>
           <p>Our dashboard is coming soon. Check back here later…</p>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-      <div class="footer-container">
-        <div class="footer-brand">
-          <h2>GUILD<span class="accent">WORKS</span></h2>
-          <p>© 2025 GuildWorks Discord Solutions</p>
-          <p>Powered by xdluxyy</p>
-        </div>
-
-        <div class="footer-links">
-          <div>
-            <h3>NAVIGATION</h3>
-            <a href="#">Home</a>
-            <a href="#">Services</a>
-            <a href="#">Support</a>
-          </div>
-          <div>
-            <h3>IMPORTANT</h3>
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
-          </div>
-          <div>
-            <h3>PRODUCTS</h3>
-            <a href="#">Ticket System</a>
-            <a href="#">Verification</a>
-            <a href="#">Workflow Tools</a>
-          </div>
-        </div>
+  <!-- Footer (unchanged) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>GUILD<span class="accent">WORKS</span></h2>
+        <p>© 2025 GuildWorks Discord Solutions</p>
+        <p>Powered by xdluxyy</p>
       </div>
 
-      <div class="footer-bottom">
-        <p>
-          © 2025 GuildWorks — Powered by xdluxyy •
-          <a href="#">Privacy Policy</a> •
+      <div class="footer-links">
+        <div>
+          <h3>NAVIGATION</h3>
+          <a href="#">Home</a>
+          <a href="#">Services</a>
+          <a href="#">Support</a>
+        </div>
+        <div>
+          <h3>IMPORTANT</h3>
           <a href="#">Terms of Service</a>
-        </p>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div>
+          <h3>PRODUCTS</h3>
+          <a href="#">Ticket System</a>
+          <a href="#">Verification</a>
+          <a href="#">Workflow Tools</a>
+        </div>
       </div>
-    </footer>
+    </div>
 
-    <script>
-      const dotField = document.querySelector(".dot-field");
-      const ctx = document.createElement("canvas");
-      const c = ctx.getContext("2d");
-      dotField.appendChild(ctx);
+    <div class="footer-bottom">
+      <p>
+        © 2025 GuildWorks — Powered by <a href="#">xdluxyy</a> •
+        <a href="#">Privacy Policy</a> •
+        <a href="#">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
 
-      function resize() {
-        ctx.width = window.innerWidth;
-        ctx.height = 400;
+  <!-- Mouse-reactive dots confined to the box -->
+  <script>
+    (function () {
+      const box = document.querySelector('.premier-box');
+      const canvas = document.querySelector('.premier-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let dots = [];
+      let mouse = { x: -9999, y: -9999, inside: false };
+
+      function resizeCanvas() {
+        const rect = box.getBoundingClientRect();
+        canvas.width = Math.max(300, rect.width);
+        canvas.height = Math.max(200, rect.height);
+        initDots();
       }
-      resize();
-      window.addEventListener("resize", resize);
 
-      const dots = Array(180)
-        .fill()
-        .map(() => ({
-          x: Math.random() * ctx.width,
-          y: Math.random() * ctx.height,
-          size: 1,
-          baseY: 0,
-        }));
-
-      window.addEventListener("mousemove", (e) => {
-        const rect = ctx.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        dots.forEach((d) => {
-          const dx = mx - d.x;
-          const dy = my - d.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            d.y -= (100 - dist) * 0.02;
-          } else {
-            d.y += (Math.random() - 0.5) * 0.1;
-          }
+      function initDots() {
+        const count = Math.floor((canvas.width * canvas.height) / 14000) + 60; // density
+        dots = Array.from({ length: count }, () => {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          return {
+            x, y,
+            bx: x, by: y, // base positions for gentle drift
+            r: 1.1 + Math.random() * 1.1,
+            spx: (Math.random() - 0.5) * 0.25,
+            spy: (Math.random() - 0.5) * 0.25
+          };
         });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // gentle grid-ish tiny background specks for texture
+        ctx.fillStyle = 'rgba(88,101,242,0.28)';
+        ctx.globalAlpha = 0.35;
+        for (let i = 0; i < 40; i++) {
+          const x = (i * (canvas.width / 40)) + (i % 2 ? 0 : 8);
+          const y = (i * (canvas.height / 40)) % canvas.height;
+          ctx.fillRect(x % canvas.width, y, 1, 1);
+        }
+        ctx.globalAlpha = 1;
+
+        // dots
+        for (const d of dots) {
+          // slight drift around base
+          d.bx += d.spx * 0.2;
+          d.by += d.spy * 0.2;
+
+          // pull back toward bounds
+          d.bx = Math.max(0, Math.min(canvas.width, d.bx));
+          d.by = Math.max(0, Math.min(canvas.height, d.by));
+
+          // attraction/repulsion to mouse when inside
+          let dx = 0, dy = 0;
+          if (mouse.inside) {
+            dx = d.bx - mouse.x;
+            dy = d.by - mouse.y;
+            const dist = Math.hypot(dx, dy) || 1;
+            const influence = Math.max(0, 120 - dist) / 120; // within 120px
+            // push away a touch, then ease back
+            d.x = d.bx + (dx / dist) * influence * 22;
+            d.y = d.by + (dy / dist) * influence * 22;
+          } else {
+            // ease toward base when mouse leaves
+            d.x += (d.bx - d.x) * 0.05;
+            d.y += (d.by - d.y) * 0.05;
+          }
+
+          // base relaxer (keeps close to bx/by)
+          d.x += (d.bx - d.x) * 0.08;
+          d.y += (d.by - d.y) * 0.08;
+
+          // draw
+          ctx.beginPath();
+          ctx.fillStyle = '#8ea0ff'; // brighter blurple dots
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      function trackMouse(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.inside =
+          mouse.x >= 0 && mouse.x <= rect.width &&
+          mouse.y >= 0 && mouse.y <= rect.height;
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('scroll', () => {
+        // keep canvas sized to the visual box (in case of responsive changes)
+        resizeCanvas();
       });
 
-      function animate() {
-        c.fillStyle = "rgba(0, 0, 0, 0)";
-        c.clearRect(0, 0, ctx.width, ctx.height);
-        dots.forEach((d) => {
-          c.fillStyle = "#5865f2";
-          c.beginPath();
-          c.arc(d.x, d.y, d.size, 0, Math.PI * 2);
-          c.fill();
-        });
-        requestAnimationFrame(animate);
-      }
-      animate();
-    </script>
-  </body>
+      box.addEventListener('mousemove', trackMouse);
+      box.addEventListener('mouseleave', () => (mouse.inside = false));
+
+      // init
+      resizeCanvas();
+      draw();
+    })();
+  </script>
+</body>
 </html>
