@@ -1,230 +1,177 @@
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background-color: #0a0a0f;
-  color: #fff;
+  padding: 0;
   overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  background-color: #000000; /* true black */
+  color: white;
 }
 
-/* === STARFIELD BACKGROUND === */
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  padding: 8px 25px;
+  background: #0a0a0f;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(100, 100, 255, 0.25);
+  max-width: 1000px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 26px;
+  height: 26px;
+}
+
+.guild {
+  color: #fff;
+  font-weight: 700;
+}
+
+.works {
+  color: #6b6bff;
+  font-weight: 700;
+}
+
+nav a {
+  color: #cfcfcf;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.dashboard-btn {
+  background: linear-gradient(90deg, #5a5aff, #7c7cff);
+  padding: 7px 18px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 0 15px rgba(90, 90, 255, 0.3);
+  transition: 0.3s;
+}
+
+.dashboard-btn:hover {
+  background: linear-gradient(90deg, #7070ff, #9999ff);
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.hero-box {
+  background: rgba(15, 15, 25, 0.9);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 0 40px rgba(110, 110, 255, 0.3);
+  text-align: center;
+}
+
+.hero-box h2 {
+  font-size: 1.6rem;
+}
+
+.accent {
+  color: #6b6bff;
+}
+
+.hero-box p {
+  font-size: 0.9rem;
+  color: #bcbcbc;
+}
+
+.hero-box .small {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* FOOTER */
+footer {
+  background: #0a0a0f;
+  color: #d0d0d0;
+  padding: 50px 100px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-left h3 {
+  color: #fff;
+}
+
+.footer a {
+  color: #bcbcbc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  background: #000000 !important; /* pitch black */
+  color: white;
+}
+
+/* Make footer longer / more spacious */
+footer {
+  background: #0a0a0f;
+  color: #d0d0d0;
+  padding: 80px 120px; /* more height */
+  margin-top: 60px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Starfield stays in back */
 #starfield {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
-  pointer-events: none;
   background: transparent;
-}
-
-/* === NAVBAR === */
-.nav-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
-  position: relative;
-  z-index: 10;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 80%;
-  max-width: 1200px;
-  background: rgba(0, 0, 0, 0.75);
-  border-radius: 25px;
-  padding: 18px 40px;
-  box-shadow: 0 0 30px rgba(88, 101, 242, 0.35);
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.brand {
-  font-weight: 700;
-  color: #fff;
-  font-size: 18px;
-}
-
-.brand span {
-  color: #5865f2;
-}
-
-.nav-center {
-  list-style: none;
-  display: flex;
-  gap: 45px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-center a {
-  text-decoration: none;
-  color: #ccc;
-  font-size: 15px;
-  transition: 0.25s ease;
-}
-
-.nav-center a:hover {
-  color: #fff;
-}
-
-/* Dashboard button */
-.dashboard-btn {
-  position: relative;
-  display: inline-block;
-  color: #fff;
-  padding: 10px 25px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  overflow: hidden;
-  z-index: 1;
-  background: rgba(88, 101, 242, 0.9);
-  box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.dashboard-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    #5865f2,
-    #7289da,
-    #8891ff,
-    #5865f2,
-    #7289da
-  );
-  background-size: 300% 300%;
-  animation: holoMove 6s linear infinite;
-  border-radius: 12px;
-  filter: brightness(1.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
   z-index: -1;
 }
 
-.dashboard-btn:hover::before {
-  opacity: 1;
-}
 
-.dashboard-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(88, 101, 242, 0.6);
-}
-
-@keyframes holoMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-/* === HERO SECTION === */
-.hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  position: relative;
-  z-index: 5;
-}
-
-.hero-box {
-  text-align: center;
-  max-width: 700px;
-  background: rgba(20, 20, 30, 0.6);
-  padding: 50px;
-  border-radius: 20px;
-  box-shadow: 0 0 50px rgba(88, 101, 242, 0.2);
-  backdrop-filter: blur(8px);
-  transition: 0.3s ease;
-}
-
-.hero-box:hover {
-  box-shadow: 0 0 80px rgba(88, 101, 242, 0.4);
-}
-
-.hero-box span {
-  color: #7289da;
-}
-
-.hero-box h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.hero-box p {
-  font-size: 14px;
-  color: #ccc;
-  line-height: 1.6;
-}
-
-.hero-box small {
-  display: block;
-  margin-top: 15px;
-  color: #888;
-}
-
-/* === FOOTER === */
-.footer {
-  background: rgba(5, 5, 10, 0.7);
-  padding: 60px 0;
-  display: flex;
-  justify-content: center;
-  color: #ccc;
-}
-
-.footer-content {
-  width: 80%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-  flex-wrap: wrap;
-}
-
-.footer-column h2 {
-  font-weight: 700;
-  color: #fff;
-}
-
-.footer-column h2 span {
-  color: #5865f2;
-}
-
-.footer-column h3 {
-  color: #888;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-.footer-column a {
-  color: #ccc;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-  font-size: 13px;
-  transition: 0.2s ease;
-}
-
-.footer-column a:hover {
-  color: #fff;
-}
