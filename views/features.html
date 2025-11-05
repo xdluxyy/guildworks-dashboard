@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuildWorks | Features</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo">
+        <h1>Guild<span class="accent">Works</span></h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/features" class="active">Features</a></li>
+        <li><a href="/support">Support</a></li>
+      </ul>
+      <a href="/dashboard" class="dashboard-btn">Dashboard</a>
+    </nav>
+
+    <!-- STARFIELD -->
+    <canvas id="starfield"></canvas>
+
+    <!-- FEATURES MAIN -->
+    <main class="features-section">
+  <h1 class="features-title">Our <span class="accent">Features</span></h1>
+  <p class="features-desc">
+    GuildWorks combines power, automation, and design to give your brand the tools it needs to succeed — whether you're a creator, developer, or team.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🧱</div>
+      <h2>Server Creation</h2>
+      <p>We build fully optimized Discord servers tailored to your goals — from business hubs to community spaces, ready for launch.</p>
+      <span class="feature-tag">Custom Setup • Branding • Automation</span>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎟️</div>
+      <h2>Ticket System</h2>
+      <p>Streamline communication and support with our advanced ticket bot — includes transcripts, claim roles, and automated logs.</p>
+      <span class="feature-tag">Multi-Role Access • Logs • Workflow</span>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🧥</div>
+      <h2>Cape Design</h2>
+      <p>High-quality cape design creation for users, creators, and brands — a blend of creativity and digital craftsmanship.</p>
+      <span class="feature-tag">Pixel Precision • Branding • Style</span>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">⚙️</div>
+      <h2>Workflow Tools</h2>
+      <p>Integrated dashboards, analytics, and systems designed to make your community run efficiently — always in sync.</p>
+      <span class="feature-tag">Dashboards • Analytics • Utility</span>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h2>Automation & API</h2>
+      <p>Connect your services, Discord bots, and databases with our GuildWorks API to automate and expand your capabilities.</p>
+      <span class="feature-tag">API Access • Integrations • Smart Tools</span>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h2>Community Automation</h2>
+      <p>Build automated workflows that manage roles, handle verifications, and interact with users — all customized for your community.</p>
+      <span class="feature-tag">Smart Roles • Verification • Auto Tasks</span>
+    </div>
+  </div>
+
+  <!-- HERO BOX AT BOTTOM -->
+  <section class="hero-box bottom-hero">
+    <h1 class="hero-title">
+      A all-in-one service, provided by 
+      <span class="gradient-text">GuildWorks</span>
+    </h1>
+    <p class="hero-desc">
+      From automation to design, the possibilities are truly endless — GuildWorks empowers you to build, create, and scale communities faster than ever before.
+    </p>
+  </section>
+</main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h4>GUILD<span class="accent">WORKS</span></h4>
+          <p>© 2025 GuildWorks Discord Solutions</p>
+          <p>Powered by xdluxyy</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <p><a href="/" style="color:inherit;text-decoration:none;">Home</a></p>
+          <p><a href="/features" style="color:inherit;text-decoration:none;">Features</a></p>
+          <p><a href="/support" style="color:inherit;text-decoration:none;">Support</a></p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Important</h4>
+          <p>Terms of Service</p>
+          <p>Privacy Policy</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Products</h4>
+          <p>Ticket System</p>
+          <p>Verification</p>
+          <p>Workflow Tools</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/starfield.js"></script>
+<script>
+  // Fade-in when visible
+  const bottomHero = document.querySelector('.bottom-hero');
+
+  function revealOnScroll() {
+    const rect = bottomHero.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top < windowHeight - 100) {
+      bottomHero.classList.add('visible');
+      window.removeEventListener('scroll', revealOnScroll); // run once
+    }
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll(); // trigger on load if already in view
+</script>
+</body>
+</html>
